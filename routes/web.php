@@ -19,3 +19,4 @@ Route::get('/', function () {
 });
 
 Route::post('/upload', [FileController::class, 'create']);
+Route::get('/transfers/{uuid}/{filename}', [FileController::class, 'show'])->name('transfer.show');
