@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload de fichier</title>
+    <title>GreenTransfer</title>
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
     <link rel="alternate icon" href="{{ asset('favicon.ico') }}">
     <style>
@@ -79,13 +79,58 @@
             color: #555;
             word-break: break-all;
         }
+
+        .loader-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .loader-overlay.active {
+            display: flex;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #10b981;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loader-text {
+            color: white;
+            margin-top: 1rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
+    <!-- Loader overlay -->
+    <div class="loader-overlay" id="loaderOverlay">
+        <div class="spinner"></div>
+        <div class="loader-text">Téléchargement en cours...</div>
+    </div>
+
     <div class="card">
         <h2>Ajouter un fichier</h2>
 
-        <form action="{{ url('/upload') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ url('/file') }}" method="POST" enctype="multipart/form-data" id="uploadForm">
             @csrf
 
             <!-- Label stylé pour input file -->
@@ -102,6 +147,8 @@
     <script>
         const fileInput = document.getElementById('fileInput');
         const fileName = document.getElementById('fileName');
+        const uploadForm = document.getElementById('uploadForm');
+        const loaderOverlay = document.getElementById('loaderOverlay');
 
         fileInput.addEventListener('change', () => {
             if (fileInput.files.length > 0) {
@@ -109,6 +156,10 @@
             } else {
                 fileName.textContent = "Aucun fichier choisi";
             }
+        });
+
+        uploadForm.addEventListener('submit', () => {
+            loaderOverlay.classList.add('active');
         });
     </script>
 </body>
