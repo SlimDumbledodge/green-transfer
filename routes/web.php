@@ -15,8 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('upload');
+    return view('uploadFile');
 });
 
-Route::post('/upload', [FileController::class, 'create']);
-Route::get('/transfers/{uuid}/{filename}', [FileController::class, 'show'])->name('transfer.show');
+Route::post('/file', [FileController::class, 'create']);
+Route::get('/transfers/{uuid}', [FileController::class, 'viewTransfer'])->name('transfer.view');
+Route::get('/transfers/{uuid}/{filename}', [FileController::class, 'download'])->name('transfer.download');
