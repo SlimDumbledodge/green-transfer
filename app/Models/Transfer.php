@@ -14,4 +14,8 @@ class Transfer extends Model
         'expires_at',
         'status'
     ];
+
+    protected $casts = [
+        'expires_at' => 'datetime',
+    ];
 };
