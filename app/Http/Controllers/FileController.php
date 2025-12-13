@@ -17,7 +17,7 @@ class FileController extends Controller
 
         $transfer = Transfer::create([
             'uuid'       => Str::uuid(),
-            'expires_at' => now()->addDays(7),
+            'expires_at' => now()->addMinutes(30),
             'status'     => 'active',
         ]);
 

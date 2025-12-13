@@ -17,12 +17,10 @@ class DeleteExpiredFiles extends Command
     {
         $now = Carbon::now();
 
-        // Correction ici : "where" au lieu de "were"
         $expiredTransfers  = Transfer::with('files')->where('expires_at', '<', $now)->get();
         $totalFilesDeleted = 0;
         foreach ($expiredTransfers as $transfer) {
             foreach ($transfer->files as $file) {
-                // Vérifier et supprimer le fichier physique
                 if (!empty($file->stored_path) && Storage::disk('public')->exists($file->stored_path)) {
                     Storage::disk('public')->delete($file->stored_path);
                     $this->info("Fichier supprimé : {$file->stored_path}");
@@ -31,7 +29,6 @@ class DeleteExpiredFiles extends Command
                 $totalFilesDeleted++;
             }
 
-            // Supprimer le dossier du transfert s'il est vide
             $transferDir = "transfers/{$transfer->uuid}";
             if (Storage::disk('public')->exists($transferDir)) {
                 Storage::disk('public')->deleteDirectory($transferDir);
