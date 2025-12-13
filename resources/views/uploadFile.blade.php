@@ -159,6 +159,17 @@
     <div class="card">
         <h2>Ajouter un fichier</h2>
 
+        @if ($errors->any())
+            <div style="background-color: #fee2e2; border: 1px solid #f87171; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; text-align: left;">
+                <strong style="color: #dc2626;">❌ Erreur :</strong>
+                <ul style="margin-left: 1.5rem; margin-top: 0.5rem; color: #991b1b;">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <div class="privacy-notice">
             <h3>🔒 Confidentialité et sécurité</h3>
             <ul>

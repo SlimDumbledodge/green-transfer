@@ -66,9 +66,7 @@ class FileFilterRequest extends FormRequest
                 'required',
                 'file',
                 'max:51200', // 50 Mo
-                'mimes:' . implode(',', array_map(function($mime) {
-                    return str_replace(['application/', 'image/', 'audio/', 'video/', 'text/'], '', $mime);
-                }, $allowedMimes)),
+                'mimetypes:' . implode(',', $allowedMimes),
                 function ($attribute, $value, $fail) use ($allowedExtensions) {
                     $extension = strtolower($value->getClientOriginalExtension());
                     if (!in_array($extension, $allowedExtensions)) {
