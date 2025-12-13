@@ -18,7 +18,7 @@ class DeleteExpiredFiles extends Command
         $now = Carbon::now();
 
         // Correction ici : "where" au lieu de "were"
-        $expiredTransfers  = Transfer::with('files')->where('expires_at', '>', $now)->get();
+        $expiredTransfers  = Transfer::with('files')->where('expires_at', '<', $now)->get();
         $totalFilesDeleted = 0;
         foreach ($expiredTransfers as $transfer) {
             foreach ($transfer->files as $file) {
