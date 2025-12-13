@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FileController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,3 +22,9 @@ Route::get('/', function () {
 Route::post('/file', [FileController::class, 'create']);
 Route::get('/transfers/{uuid}', [FileController::class, 'viewTransfer'])->name('transfer.view');
 Route::get('/transfers/{uuid}/{filename}', [FileController::class, 'download'])->name('transfer.download');
+
+Route::get('/run-cron-files', function () {
+    Artisan::call('files:cleanup');
+    return 'Commande exécutée';
+});
+
