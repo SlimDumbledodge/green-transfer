@@ -100,6 +100,17 @@
             border-top: 1px solid #e5e7eb;
         }
 
+        .privacy-footer {
+            background-color: #f8fafc;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            font-size: 0.8rem;
+            color: #6b7280;
+            text-align: center;
+            border: 1px solid #e5e7eb;
+        }
+
         .expires-info strong {
             color: #dc2626;
         }
@@ -138,6 +149,8 @@
         <div class="expires-info">
             Ce lien expire le <strong>{{ $expires_at }}</strong>
         </div>
-    </div>
+        <div class="privacy-footer">
+            🔒 <strong>Confidentialité :</strong> Ce fichier est hébergé de manière sécurisée. Aucune donnée n'est partagée avec des tiers et sera automatiquement supprimée après expiration.
+        </div>    </div>
 </body>
 </html>

@@ -38,6 +38,35 @@
             color: #333;
         }
 
+        .privacy-notice {
+            background-color: #f0fdf4;
+            border: 1px solid #86efac;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.875rem;
+            color: #166534;
+            text-align: left;
+        }
+
+        .privacy-notice h3 {
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            color: #15803d;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .privacy-notice ul {
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .privacy-notice li {
+            margin-bottom: 0.25rem;
+        }
+
         input[type="file"] {
             display: none; /* on cache l'input de base */
         }
@@ -129,6 +158,16 @@
 
     <div class="card">
         <h2>Ajouter un fichier</h2>
+
+        <div class="privacy-notice">
+            <h3>🔒 Confidentialité et sécurité</h3>
+            <ul>
+                <li>Vos fichiers sont chiffrés et stockés temporairement</li>
+                <li>Aucune donnée n'est partagée avec des tiers</li>
+                <li>Les fichiers sont automatiquement supprimés après expiration</li>
+                <li>Nous ne conservons aucune copie de vos données</li>
+            </ul>
+        </div>
 
         <form action="{{ url('/file') }}" method="POST" enctype="multipart/form-data" id="uploadForm">
             @csrf
