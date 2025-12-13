@@ -23,7 +23,7 @@ Route::post('/file', [FileController::class, 'create']);
 Route::get('/transfers/{uuid}', [FileController::class, 'viewTransfer'])->name('transfer.view');
 Route::get('/transfers/{uuid}/{filename}', [FileController::class, 'download'])->name('transfer.download');
 
-Route::get('/run-cron-files', function () {
+Route::get('/delete-expired-transfers', function () {
     Artisan::call('files:cleanup');
     return 'Commande exécutée';
 });
