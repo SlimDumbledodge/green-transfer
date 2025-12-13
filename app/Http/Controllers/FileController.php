@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FileFilterRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
@@ -11,18 +12,8 @@ use App\Models\Transfer;
 
 class FileController extends Controller
 {
-    public function create(Request $request)
+    public function create(FileFilterRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'file' => 'required|file|max:10240', // max 10 Mo
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'message' => 'Validation failed.',
-                'errors'  => $validator->errors(),
-            ], 422);
-        }
 
         $transfer = Transfer::create([
             'uuid'       => Str::uuid(),
