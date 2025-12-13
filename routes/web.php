@@ -19,7 +19,7 @@ Route::get('/', function () {
     return view('uploadFile');
 });
 
-Route::post('/file', [FileController::class, 'create']);
+Route::post('/file', [FileController::class, 'create'])->middleware('throttle:10,1');
 Route::get('/transfers/{uuid}', [FileController::class, 'viewTransfer'])->name('transfer.view');
 Route::get('/transfers/{uuid}/{filename}', [FileController::class, 'download'])->name('transfer.download');
 
